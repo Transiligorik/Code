@@ -1,15 +1,17 @@
 package task1;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Vectors {
+import static java.lang.Math.abs;
+
+public class Vector{
     private int x;
     private int y;
     private int z;
 
-    Vectors(){};
+    Vector(){};
 
-    public Vectors(int x, int y, int z) {
+    public Vector(int x, int y, int z){
         this.x = x;
         this.y = y;
         this.z = z;
@@ -18,98 +20,95 @@ public class Vectors {
     public int getX(){
         return this.x;
     }
+
     public int getY(){
         return this.y;
     }
+
     public int getZ(){
         return this.z;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setZ(int z) {
-        this.z = z;
-    }
-
-    public int lengthVector(){
-        int result = (int) Math.sqrt((int) Math.pow(getX(),2) +(int) Math.pow(getY(),2) + (int) Math.pow(getZ(),2));
+    public double lengthVector(){
+        double result = (int) Math.sqrt((int) Math.pow(getX(),getX()) +(int) Math.pow(getY(),getY()) + (int) Math.pow(getZ(),getZ()));
         return result;
     }
 
-    public int scalMyltip(task1.Vectors v1, task1.Vectors v2) {
-        int x = v1.getX()*v2.getX();
-        int y = v1.getY()*v2.getY();
-        int z = v1.getZ()*v2.getZ();
-        return (x+y+z);
+    public int scalMyltip(Vector v){
+        int x = this.getX()*v.getX();
+        int y = this.getY()*v.getY();
+        int z = this.getZ()*v.getZ();
+        return x+y+z;
     }
 
-    public task1.Vectors scalMyltipToAnotherVec(task1.Vectors v1, task1.Vectors v2){
-        int x = v1.getY()*v2.getZ() - v1.getZ()*v2.getY();
-        int y = v1.getZ()*v2.getX() - v1.getX()*v2.getZ();
-        int z = v1.getX()*v2.getY() - v1.getY()*v2.getX();
-        return new task1.Vectors(x,y,z);
+    public Vector scalMyltipToAnotherVec(Vector v){
+        int x = this.getY()*v.getZ() - this.getZ()*v.getY();
+        int y = this.getZ()*v.getX() - this.getX()*v.getZ();
+        int z = this.getX()*v.getY() - this.getY()*v.getX();
+        return new Vector(x,y,z);
     }
 
-    public int calculateCorner(int v3, int a, int b){
-        return v3/(a*b);
+    public double calculateCorner(Vector v1, Vector v2){
+        double a = v1.lengthVector();
+        double b = v2.lengthVector();
+        double v3 = v1.scalMyltip(v2);
+        return v3/(abs(a*b));
     }
 
-    public task1.Vectors calculateSumma(task1.Vectors v1, task1.Vectors v2){
-        int x = v1.getX() + v2.getX();
-        int y = v1.getY() + v2.getY();
-        int z = v1.getZ() + v2.getZ();
-        return new task1.Vectors(x,y,z);
+    public Vector calculateSumma(Vector v){
+        int x = this.getX() + v.getX();
+        int y = this.getY() + v.getY();
+        int z = this.getZ() + v.getZ();
+        return new Vector(x,y,z);
     }
 
-    public task1.Vectors calculateSubtraction(task1.Vectors v1, task1.Vectors v2){
-        int x = v1.getX() - v2.getX();
-        int y = v1.getY() - v2.getY();
-        int z = v1.getZ() - v2.getZ();
-        return new task1.Vectors(x,y,z);
+    public Vector calculateSubtraction(Vector v){
+        int x = this.getX() - v.getX();
+        int y = this.getY() - v.getY();
+        int z = this.getZ() - v.getZ();
+        return new Vector(x,y,z);
     }
 
-    public static int randomVector(){
-        int minValue = 1;
-        int maxValue = 10;
-        int randomValue = minValue + (int) (Math.random() * (maxValue - minValue + 1));
+    private static int randomNumber(){
+        int randomValue = (int) (Math.random() * 10);
         return randomValue;
     }
 
-    public static ArrayList<task1.Vectors> randomSizeArray(int n){
+    public static Vector[] randomSizeArray(int n){
 
-        ArrayList<task1.Vectors> arr = new ArrayList<task1.Vectors>(n);
+        Vector[] vector = new Vector[n];
 
         for(int i = 0; i < n; i++){
-            int x = randomVector();
-            int y = randomVector();
-            int z = randomVector();
-            task1.Vectors v = new task1.Vectors(x,y,z);
-            arr.add(v);
+            int x = randomNumber();
+            int y = randomNumber();
+            int z = randomNumber();
+            Vector v = new Vector(x,y,z);
+            vector[i] = v;
         }
-        return arr;
+        return vector;
     }
+
 }
 
 class VectorTest{
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
-        task1.Vectors v1 = new task1.Vectors(2,4,6);
-        task1.Vectors v2 = new task1.Vectors(3,5,7);
+        Vector v1 = new Vector(2,4,6);
+        Vector v2 = new Vector(3,5,7);
 
         System.out.println(v1.lengthVector());
         System.out.println(v2.lengthVector());
 
-        task1.Vectors v3 = new task1.Vectors();
+        Vector v3 = new Vector();
 
-        System.out.println(v3.scalMyltip(v1,v2));
-        System.out.println(v3.scalMyltipToAnotherVec(v1,v2));
-        System.out.println(v3.scalMyltipToAnotherVec(v1,v2));
+        System.out.println(v1.calculateSumma(v2));
+        System.out.println(v3.calculateCorner(v1,v2));
+        System.out.println(Arrays.toString(Vector.randomSizeArray(5)));
+        System.out.println(v1.calculateSubtraction(v2));
+        System.out.println(v2.calculateSubtraction(v1));
+        System.out.println(v1.scalMyltip(v2));
+        System.out.println(v1.scalMyltipToAnotherVec(v2));
+        System.out.println(v2.scalMyltipToAnotherVec(v1));
 
     }
 }
