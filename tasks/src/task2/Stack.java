@@ -1,17 +1,17 @@
 package task2;
 
 public class Stack {
-    private final Product product;
+    private Product product;
 
-    private final int productPieces;
+    private int productAmount;
 
     Stack(Product product, int productPieces) {
         this.product = product;
-        this.productPieces = productPieces;
+        this.productAmount = productPieces;
     }
 
-    public int getProductPieces() {
-        return productPieces;
+    public int getProductAmount() {
+        return productAmount;
     }
 
     public Product getProduct() {
@@ -20,6 +20,7 @@ public class Stack {
 
     @Override
     public String toString() {
-        return "Stack : is have a " + product.getName() + ", his pieces: " + getProductPieces();
+        return "Stack : is have a " + product.getName() + ", his pieces: " + getProductAmount();
     }
+
 }

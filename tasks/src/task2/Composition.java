@@ -1,43 +1,56 @@
 package task2;
 
+import java.util.Arrays;
+
 public class Composition {
-    int amountStacks;
+    Stack[] amountStacks;
+    Stack[] newArrayIsStacks;
+    Stack[] compositionWithNewProduct;
 
     @Override
     public String toString() {
-        return "Всего на складе стеллажей: " +  amountStacks;
-    }
-
-    public Stack[] arrStacks(Stack... stack) {
-        Stack[] newArrayIsStacks = new Stack[stack.length];
-        for(int i = 0; i < stack.length; i++) {
-            newArrayIsStacks[i] = stack[i];
+        if (compositionWithNewProduct != null) {
+            return "Всего на складе стеллажей: " + compositionWithNewProduct.length;
+        } else {
+            return "Всего на складе стеллажей: " + newArrayIsStacks.length;
         }
-        amountStacks = newArrayIsStacks.length;
-        return newArrayIsStacks;
     }
 
-    public double costAllProducts(Stack[] arrStacks) {
+    public double calculateCostAllProducts() {
         double sum = 0;
-        for(int i = 0; i < arrStacks.length; i++) {
-            sum += arrStacks[i].getProductPieces() * arrStacks[i].getProduct().getProductPrice();
+        for(int i = 0; i < newArrayIsStacks.length; i++) {
+            sum += newArrayIsStacks[i].getProductAmount() * newArrayIsStacks[i].getProduct().getProductPrice();
         }
         return sum;
     }
 
-    public double costProductAtStack(Stack stack) {
-        return stack.getProductPieces() * stack.getProduct().getProductPrice();
-    }
-
-    public int amountAllProducts(Stack[] arrStacks) {
+    public int calculateAmountAllProducts(Stack[] arrStacks) {
         int amountCounter = 0;
         for(int i = 0; i < arrStacks.length; i++) {
-            amountCounter += arrStacks[i].getProductPieces();
+            amountCounter += arrStacks[i].getProductAmount();
         }
         return amountCounter;
     }
 
-    public double mostExpensiveProduct(Stack[] arrStacks) {
+    public Stack[] addArrStacks(Stack... stack) {
+        newArrayIsStacks = new Stack[stack.length];
+        for(int i = 0; i < stack.length; i++) {
+            newArrayIsStacks[i] = stack[i];
+        }
+        amountStacks = new Stack[newArrayIsStacks.length];
+        return newArrayIsStacks;
+    }
+
+    public double calculateCostProductAtStack(Product pr) {
+        for(int i = 0; i < newArrayIsStacks.length; i++) {
+            if(pr.getName().equals(newArrayIsStacks[i].getProduct().getName())) {
+                return newArrayIsStacks[i].getProductAmount() * newArrayIsStacks[i].getProduct().getProductPrice();
+            }
+        }
+        return 0;
+    }
+
+    public double calculateMostExpensiveProduct(Stack[] arrStacks) {
 
         double expensiveProduct = arrStacks[0].getProduct().getProductPrice();
 
@@ -49,19 +62,21 @@ public class Composition {
         return expensiveProduct;
     }
 
-    public double mostCheapestProduct(Stack[] arrStacks) {
-
-        double cheapestProduct = arrStacks[0].getProduct().getProductPrice();
-
-        for(int i = 1; i < arrStacks.length; i++) {
-            if(cheapestProduct > arrStacks[i].getProduct().getProductPrice()) {
-                cheapestProduct = arrStacks[i].getProduct().getProductPrice();
+    public double searchMinPriceProduct(Stack[] newArrayIsStacks) {
+        double minPriceProduct = newArrayIsStacks[0].getProductAmount() * newArrayIsStacks[0].getProduct().getProductPrice();
+        for(int i = 1; i < newArrayIsStacks.length; i++) {
+            double iteratorPriceProduct = newArrayIsStacks[i].getProductAmount() * newArrayIsStacks[i].getProduct().getProductPrice();
+            if(minPriceProduct > iteratorPriceProduct) {
+                minPriceProduct = iteratorPriceProduct;
             }
         }
-        return cheapestProduct;
+        return minPriceProduct;
+
     }
 
-    public Product addNewProductsToComposition(String name, double productPrice) {
-        return new Product(name, productPrice);
+    public Stack[] addNewProductsToComposition(Stack stack) {
+        compositionWithNewProduct = Arrays.copyOf(newArrayIsStacks, newArrayIsStacks.length + 1);
+        compositionWithNewProduct[compositionWithNewProduct.length - 1] = stack;
+        return compositionWithNewProduct;
     }
 }
