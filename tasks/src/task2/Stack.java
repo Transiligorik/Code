@@ -2,7 +2,6 @@ package task2;
 
 public class Stack {
     private Product product;
-
     private int productAmount;
 
     Stack(Product product, int productPieces) {
@@ -23,4 +22,7 @@ public class Stack {
         return "Stack : is have a " + product.getName() + ", his pieces: " + getProductAmount();
     }
 
+    public double calculateCostAtStack() {
+        return productAmount * product.getProductPrice();
+    }
 }

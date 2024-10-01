@@ -16,14 +16,15 @@ public class Main {
 
 
         Composition composition = new Composition();
-        Stack[] arr = composition.addArrStacks(st1,st2,st3);
-        System.out.println(composition);
+        composition.addArrStack(st1);
+        composition.addArrStack(st2);
+//        System.out.println(composition);
         System.out.println(composition.calculateCostAllProducts());
-        System.out.println(composition.calculateCostProductAtStack(balls));
-        System.out.println(composition.calculateAmountAllProducts(arr));
-        System.out.println(composition.calculateMostExpensiveProduct(arr));
-        System.out.println(composition.searchMinPriceProduct(arr));
-        composition.addNewProductsToComposition(st4);
+//        System.out.println(composition.calculateCostProductAtStack(balls));
+//        System.out.println(composition.calculateAmountAllProducts(arr));
+//        System.out.println(composition.calculateMostExpensiveProduct(arr));
+//        System.out.println(composition.searchMinPriceProduct(arr));
+//        composition.addNewProductsToComposition(st4);
         System.out.println(composition);
 
 
