@@ -1,7 +1,9 @@
 package task2;
 
+import java.util.Arrays;
+
 public class Composition {
-    private Stack[] amountStacks = new Stack[100];
+    private Stack[] amountStacks = new Stack[0];
 
     @Override
     public String toString() {
@@ -16,17 +18,24 @@ public class Composition {
         return sum;
     }
 
-    public int calculateAmountAllProducts(Stack[] arrStacks) {
+    public int calculateAmountAllProducts() {
         int amountCounter = 0;
-        for(int i = 0; i < arrStacks.length; i++) {
-            amountCounter += arrStacks[i].getProductAmount();
+        for(int i = 0; i < amountStacks.length; i++) {
+            amountCounter += amountStacks[i].getProductAmount();
         }
         return amountCounter;
     }
 
     public void addArrStack(Stack stack) {
-        amountStacks = new Stack[amountStacks.length + 1];
-        amountStacks[amountStacks.length - 1] = stack;
+        Stack[] newArr;
+        if(amountStacks.length == 0) {
+            amountStacks = new Stack[1];
+            amountStacks[0] = stack;
+        } else {
+            newArr = Arrays.copyOf(amountStacks, amountStacks.length + 1);
+            amountStacks = Arrays.copyOf(newArr, newArr.length);
+            amountStacks[amountStacks.length - 1] = stack;
+        }
     }
 
     public double calculateCostProductAtStack(Product pr) {
@@ -38,22 +47,23 @@ public class Composition {
         return 0;
     }
 
-    public double calculateMostExpensiveProduct(Stack[] arrStacks) {
+    public double calculateMostExpensiveProduct() {
 
-        double expensiveProduct = arrStacks[0].getProduct().getProductPrice();
+        double expensiveProduct = amountStacks[0].getProduct().getProductPrice();
 
-        for(int i = 1; i < arrStacks.length; i++) {
-            if(expensiveProduct < arrStacks[i].getProduct().getProductPrice()) {
-                expensiveProduct = arrStacks[i].getProduct().getProductPrice();
+        for(int i = 1; i < amountStacks.length; i++) {
+            double nextExpensiveProduct = amountStacks[i].getProduct().getProductPrice();
+            if(expensiveProduct < nextExpensiveProduct) {
+                expensiveProduct = nextExpensiveProduct;
             }
         }
         return expensiveProduct;
     }
 
-    public double searchMinPriceProduct(Stack[] newArrayIsStacks) {
-        double minPriceProduct = newArrayIsStacks[0].getProductAmount() * newArrayIsStacks[0].getProduct().getProductPrice();
-        for(int i = 1; i < newArrayIsStacks.length; i++) {
-            double iteratorPriceProduct = newArrayIsStacks[i].getProductAmount() * newArrayIsStacks[i].getProduct().getProductPrice();
+    public double searchMinPriceProduct() {
+        double minPriceProduct = amountStacks[0].getProductAmount() * amountStacks[0].getProduct().getProductPrice();
+        for(int i = 1; i < amountStacks.length; i++) {
+            double iteratorPriceProduct = amountStacks[i].getProductAmount() * amountStacks[i].getProduct().getProductPrice();
             if(minPriceProduct > iteratorPriceProduct) {
                 minPriceProduct = iteratorPriceProduct;
             }
@@ -63,7 +73,7 @@ public class Composition {
     }
 
 //    public Stack[] addNewProductsToComposition(Stack stack) {
-//        compositionWithNewProduct = Arrays.copyOf(newArrayIsStacks, newArrayIsStacks.length + 1);
+//        Stack[] compositionWithNewProduct = Arrays.copyOf(amountStacks, amountStacks.length + 1);
 //        compositionWithNewProduct[compositionWithNewProduct.length - 1] = stack;
 //        return compositionWithNewProduct;
 //    }
