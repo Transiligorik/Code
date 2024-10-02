@@ -16,17 +16,14 @@ public class Main {
 
 
         Composition composition = new Composition();
-        composition.addArrStack(st1);
-        composition.addArrStack(st2);
+        composition.addStack(st1);
+        composition.addStack(st2);
         System.out.println(composition);
         System.out.println(composition.calculateCostAllProducts());
         System.out.println(composition.calculateCostProductAtStack(balls));
         System.out.println(composition.calculateAmountAllProducts());
         System.out.println(composition.calculateMostExpensiveProduct());
         System.out.println(composition.searchMinPriceProduct());
-//        composition.addNewProductsToComposition(st4);
         System.out.println(composition);
-
-
     }
 }

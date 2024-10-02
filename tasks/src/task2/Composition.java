@@ -26,14 +26,12 @@ public class Composition {
         return amountCounter;
     }
 
-    public void addArrStack(Stack stack) {
-        Stack[] newArr;
+    public void addStack(Stack stack) {
         if(amountStacks.length == 0) {
             amountStacks = new Stack[1];
             amountStacks[0] = stack;
         } else {
-            newArr = Arrays.copyOf(amountStacks, amountStacks.length + 1);
-            amountStacks = Arrays.copyOf(newArr, newArr.length);
+            amountStacks = Arrays.copyOf(amountStacks, amountStacks.length + 1);
             amountStacks[amountStacks.length - 1] = stack;
         }
     }
@@ -69,12 +67,5 @@ public class Composition {
             }
         }
         return minPriceProduct;
-
     }
-
-//    public Stack[] addNewProductsToComposition(Stack stack) {
-//        Stack[] compositionWithNewProduct = Arrays.copyOf(amountStacks, amountStacks.length + 1);
-//        compositionWithNewProduct[compositionWithNewProduct.length - 1] = stack;
-//        return compositionWithNewProduct;
-//    }
 }
