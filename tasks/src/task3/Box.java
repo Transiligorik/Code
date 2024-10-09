@@ -1,36 +1,28 @@
 package task3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Box extends Shape{
 
-    double size ;
-    static double countVolume = 0;
+    private List<Shape> listShape = new ArrayList<>();
 
-    public Box(double size) {
-        this.size = size;
+    private double count = 0;
+
+    public double getCount() {
+        return count;
     }
 
-    public boolean addShapes(Shape sh) {
-        boolean flag = false;
-        countVolume += sh.getVolume();
-        if(countVolume <= size) {
-             flag =  true;
+    public Box(double volume){
+        super(volume);
+    }
+
+    boolean add(Shape shape) {
+        count += shape.getVolume();
+        if(count < this.getVolume()) {
+            listShape.add(shape);
+            return true;
         }
-        System.out.println(countVolume);
-        return flag;
-    }
-
-    public static void main(String[] args) {
-        Shape shapeBall = new Ball(7);
-        Shape shapePyramide = new Pyramid(5.0, 4.5);
-        Shape shapeCylindre = new Cylinder(3);
-
-        Box box = new Box(621);
-//      shapePyramide.toString(); ----- почему не переопределился метод
-
-        System.out.println(box.addShapes(shapeCylindre));
-
-        System.out.println(box.addShapes(shapeBall));
-
-        System.out.println(box.addShapes(shapePyramide));
+        return false;
     }
 }

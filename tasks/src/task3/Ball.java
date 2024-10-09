@@ -2,13 +2,8 @@ package task3;
 
 public class Ball extends SolidOfRevolution{
 
-    public Ball (double radius) {
-        this.radius = radius;
+    public Ball() {
+      super(2);
+      volume = getRadius() *  4 * 3.14;
     }
-
-    @Override
-    public double getVolume() {
-      return   4 * 3.14 * (getRadius()*getRadius());
-    }
-
 }
