@@ -36,10 +36,10 @@ public class Composition {
         }
     }
 
-    public double calculateCostProductAtStack(Product pr) {
+    public double calculateCostProductAtStack(Product product) {
         for(int i = 0; i < amountStacks.length; i++) {
-            if(pr.getName().equals(amountStacks[i].getProduct().getName())) {
-                return amountStacks[i].getProductAmount() * amountStacks[i].getProduct().getProductPrice();
+            if(product.getName().equals(amountStacks[i].getProduct().getName())) {
+              return amountStacks[i].calculateCostAtStack();
             }
         }
         return 0;
@@ -59,9 +59,9 @@ public class Composition {
     }
 
     public double searchMinPriceProduct() {
-        double minPriceProduct = amountStacks[0].getProductAmount() * amountStacks[0].getProduct().getProductPrice();
+        double minPriceProduct = amountStacks[0].calculateCostAtStack();
         for(int i = 1; i < amountStacks.length; i++) {
-            double iteratorPriceProduct = amountStacks[i].getProductAmount() * amountStacks[i].getProduct().getProductPrice();
+            double iteratorPriceProduct = amountStacks[i].calculateCostAtStack();
             if(minPriceProduct > iteratorPriceProduct) {
                 minPriceProduct = iteratorPriceProduct;
             }
