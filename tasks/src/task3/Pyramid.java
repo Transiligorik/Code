@@ -6,9 +6,10 @@ public class Pyramid extends Shape {
     private double h;
 
     public Pyramid(double s, double h) {
+        super.getVolume(d);
         this.s = s;
         this.h = h;
-        volume = 0.33 * getH() * getS();
+        d = 0.33 * getH() * getS();
     }
 
     public double getS() {

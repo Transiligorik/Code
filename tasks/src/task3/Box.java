@@ -14,7 +14,7 @@ public class Box extends Shape{
     }
 
     public Box(double volume){
-        super(volume);
+        super.getVolume();
     }
 
     boolean add(Shape shape) {
