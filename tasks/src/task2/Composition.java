@@ -38,7 +38,7 @@ public class Composition {
 
     public double calculateCostProductAtStack(Product product) {
         for(int i = 0; i < amountStacks.length; i++) {
-            if(product.getName().equals(amountStacks[i].getProduct().getName())) {
+            if(product.equals(amountStacks[i].getProduct().getName())) {
               return amountStacks[i].calculateCostAtStack();
             }
         }
