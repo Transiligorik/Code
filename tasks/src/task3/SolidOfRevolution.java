@@ -4,9 +4,9 @@ public abstract class SolidOfRevolution extends Shape {
 
     protected double radius;
 
-    public SolidOfRevolution(double radius) {
+    public SolidOfRevolution(double radius,double volume) {
         super(volume);
-        this.radius = radius * radius;
+        this.radius = radius;
     }
 
     public double getRadius() {

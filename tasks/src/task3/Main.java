@@ -6,7 +6,7 @@ public class Main {
         Shape shapePyramide = new Pyramid(5.0, 4.5);
         Shape shapeCylindre = new Cylinder(3.0, 5);
 
-        Box box = new Box(2000);
+        Box box = new Box(197);
 
         System.out.println(box.add(shapeBall));
         System.out.println(box.getCount());
