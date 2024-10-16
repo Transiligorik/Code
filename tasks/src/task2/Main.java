@@ -10,9 +10,12 @@ public class Main {
         Product friends = new Product("Друзья",1);
 
         Stack st1 = new Stack(balls, 50);
-        Stack st2 = new Stack(toys, 10);
+        Stack st2 = new Stack(balls, 50);
         Stack st3 = new Stack(guns, 70);
         Stack st4 = new Stack(friends, 1);
+
+//        System.out.println(String.valueOf(st1.hashCode()));
+//        System.out.println(String.valueOf(st2.hashCode()));
 
 
         Composition composition = new Composition();
