@@ -22,4 +22,9 @@ public class Product {
     public String toString() {
         return "Product is a : " + getName() + ", his price: " + getProductPrice();
     }
+
+    
+    public boolean equals(Product product) {
+        return this.getName() == product.getName();
+    }
 }
