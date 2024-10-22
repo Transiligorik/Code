@@ -1,6 +1,6 @@
 package task3;
 
-public class Cylinder extends SolidOfRevolution{
+public class Cylinder extends SolidOfRevolution {
 
     private double height;
 

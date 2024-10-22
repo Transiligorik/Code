@@ -3,7 +3,7 @@ package task3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Box extends Shape{
+public class Box extends Shape {
 
     private List<Shape> listShape = new ArrayList<>();
 
@@ -17,7 +17,7 @@ public class Box extends Shape{
         super(volume);
     }
 
-    boolean add(Shape shape) {
+    public boolean add(Shape shape) {
         count += shape.getVolume();
         if(count < this.getVolume()) {
             listShape.add(shape);
