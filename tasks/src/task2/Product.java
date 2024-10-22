@@ -1,5 +1,7 @@
 package task2;
 
+import java.util.Objects;
+
 public class Product {
 
     private final String name;
@@ -23,8 +25,25 @@ public class Product {
         return "Product is a : " + getName() + ", his price: " + getProductPrice();
     }
 
-    
-    public boolean equals(Product product) {
-        return this.getName() == product.getName();
+
+//    @Override
+//    public int hashCode() {
+//        int result = 31;
+//      result = result * 17 + name.hashCode();
+//        return Objects.hash(name);
+//    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Product product = (Product) obj;
+        return product.name == this.name;
     }
 }
